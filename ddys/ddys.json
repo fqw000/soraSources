@@ -2,8 +2,8 @@
     "sourceName": "DDYS",
     "iconUrl": "https://ddys.pro/apple-touch-icon.png",
     "author": {
-        "name": "50/50",
-        "icon": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3122kQwublLkZ6rf1fEpUP79BxZOFmH9BSA&s"
+        "name": "fqw000",
+        "icon": "https://wangqifei.eu.org/images/favicon.png"
     },
     "version": "1.0.0",
     "language": "Chinese",
@@ -11,7 +11,7 @@
     "quality": "1080p",
     "baseUrl": "https://ddys.pro/",
     "searchBaseUrl": "https://ddys.pro/?s=%s",
-    "scriptUrl": "https://raw.githubusercontent.com/50n50/sources/refs/heads/main/ddys/ddys.js",
+    "scriptUrl": "https://raw.githubusercontent.com/fqw000/soraSources/refs/heads/main/ddys/ddys.js",
     "asyncJS": true,
     "type": "movies/shows"
 }
