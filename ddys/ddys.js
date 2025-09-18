@@ -1,3 +1,39 @@
+sync function scrapeIMDbPoster(title) {
+    const searchUrl = `https://www.imdb.com/find?q=${encodeURIComponent(title)}&s=tt`;
+    console.log('searchUrl: ', searchUrl);
+
+    
+    try {
+        const response = await fetch(searchUrl);
+        const html = await response.text();
+        
+        // 使用正则表达式提取第一个结果的URL
+        const resultMatch = html.match(/href="(\/title\/tt\d+\/)[^"]+"/);
+        if (resultMatch) {
+            const movieUrl = `https://www.imdb.com${resultMatch[1]}`;
+
+            console.log('movieUrl: ', movieUrl);
+            // 获取电影详情页
+
+            const movieResponse = await fetch(movieUrl);
+            const movieHtml = await movieResponse.text();
+            
+            // 提取封面图片
+            const posterMatch = movieHtml.match(/<img.+class="ipc-image".+src="([^"]+)"[^>]+/);
+            if (posterMatch) {
+                return posterMatch[1];
+            }
+}
+        const imageUrl = "https://i.ibb.co/Y4b38sTG/Search-has-no-images.png";
+        
+        return imageUrl;
+    } catch (error) {
+        const imageUrl = "https://i.ibb.co/Y4b38sTG/Search-has-no-images.png";
+        console.error('爬取IMDb失败:', error);
+        return imageUrl;
+    }
+}
+
 async function searchResults(keyword) {
     const searchUrl = `https://ddys.pro/?s=${encodeURIComponent(keyword)}`;
     try {
@@ -11,7 +47,14 @@ async function searchResults(keyword) {
         while ((match = articleRegex.exec(html)) !== null) {
             const href = match[1].trim();
             const title = match[2].trim();
-            const imageUrl = "https://i.ibb.co/Y4b38sTG/Search-has-no-images.png";
+            
+            const urlObj = new URL(href);
+            const pathname = urlObj.pathname; // "/chief-of-war/"
+            const titleCleaned = pathname.replace(/\//g, '').trim();
+            console.log(titleCleaned); // 输出: "chief-of-war"
+
+            const imageUrl = await scrapeIMDbPoster(titleCleaned);
+
 
             results.push({
                 title,
