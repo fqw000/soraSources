@@ -39,8 +39,17 @@ async function scrapeIMDbPoster(title) {
 async function searchResults(keyword) {
     const searchUrl = `https://ddys.pro/?s=${encodeURIComponent(keyword)}`;
     try {
-        const response = await fetchv2(searchUrl);
+        const response = await fetch(searchUrl);
         const html = await response.text();
+
+        // 检测 Cloudflare Challenge 页面
+        if (html.includes('<title>Just a moment...</title>')) {
+            console.log('⚠️ 遇到 Cloudflare Challenge 页面！');
+        }
+
+        // 继续正常处理
+
+
         const results = [];
 
         const articleRegex = /<article id="post-\d+"[^>]*>[\s\S]*?<h2 class="post-title"><a href="([^"]+)"[^>]*>([^<]+)<\/a><\/h2>/g;
@@ -67,16 +76,19 @@ async function searchResults(keyword) {
 
         console.log(results);
         return JSON.stringify(results);
+    
     } catch (error) {
         console.error('Search error:', error);
         throw error;
     }
+
 }
 
-// 其他函数保持不变，但建议添加错误处理
+searchResults("chief of war").then(console.log).catch(console.error);
+
 async function extractDetails(url) {
     try {
-        const response = await fetchv2(url);
+        const response = await fetch(url);
         const html = await response.text();
 
         const aliasMatch = html.match(/又名:\s*([^<]+)/);
@@ -103,7 +115,7 @@ async function extractDetails(url) {
 
 async function extractEpisodes(url) {
     try {
-        const response = await fetchv2(url);
+        const response = await fetch(url);
         const html = await response.text();
         const episodes = [];
 
