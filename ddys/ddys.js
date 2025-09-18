@@ -3,7 +3,7 @@ async function scrapeIMDbPoster(title) {
     console.log('searchUrl: ', searchUrl);
 
     try {
-        const response = await fetch(searchUrl);
+        const response = await fetchv2(searchUrl);
         const html = await response.text();
         
         // 改进的正则表达式，更精确匹配电影结果
@@ -14,7 +14,7 @@ async function scrapeIMDbPoster(title) {
             console.log('movieUrl: ', movieUrl);
 
             // 获取电影详情页
-            const movieResponse = await fetch(movieUrl);
+            const movieResponse = await fetchv2(movieUrl);
             const movieHtml = await movieResponse.text();
             
             // 改进的图片匹配逻辑
@@ -39,7 +39,7 @@ async function scrapeIMDbPoster(title) {
 async function searchResults(keyword) {
     const searchUrl = `https://ddys.pro/?s=${encodeURIComponent(keyword)}`;
     try {
-        const response = await fetch(searchUrl);
+        const response = await fetchv2(searchUrl);
         const html = await response.text();
 
         // 检测 Cloudflare Challenge 页面
@@ -88,7 +88,7 @@ searchResults("chief of war").then(console.log).catch(console.error);
 
 async function extractDetails(url) {
     try {
-        const response = await fetch(url);
+        const response = await fetchv2(url);
         const html = await response.text();
 
         const aliasMatch = html.match(/又名:\s*([^<]+)/);
@@ -115,7 +115,7 @@ async function extractDetails(url) {
 
 async function extractEpisodes(url) {
     try {
-        const response = await fetch(url);
+        const response = await fetchv2(url);
         const html = await response.text();
         const episodes = [];
 
