@@ -12,8 +12,8 @@
     "baseUrl": "https://ddys.pro/",
     "searchBaseUrl": "https://ddys.pro/?s=%s",
     "scriptUrl3": "https://raw.githubusercontent.com/50n50/sources/refs/heads/main/ddys/ddys.js",
-    "scriptUrl2": "https://raw.githubusercontent.com/JMcrafter26/sora-sources/aa3af97c7b39e60fe3f3b7524d193c66ec738152/ddys/ddys.js",
-    "scriptUrl": "https://raw.githubusercontent.com/fqw000/soraSources/refs/heads/main/ddys/ddys.js",
+    "scriptUrl": "https://raw.githubusercontent.com/anime-kun32/sources/refs/heads/main/ddys/ddys.js",
+    "scriptUrl2": "https://raw.githubusercontent.com/fqw000/soraSources/refs/heads/main/ddys/ddys.js",
     "asyncJS": true,
     "type": "movies/shows"
 }
